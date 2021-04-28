@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# # This script reads the target host server ip adress from a supplied credentials
+# # file stored at ./json/_credentials/cred.json and requests a connection. Once connection
+# # is established, the server is prepared and updated resulting in a fresh install of
+# # PostgreSQL and the creation of a superuser `postgres` as per their documentation
+
+serv_ip = `python ./utils/ip.py`
+
+ssh root@serv_ip
+
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
+
+apt-get -y update
+apt-get install postgresql-10
+
+su - postgres
