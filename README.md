@@ -51,7 +51,7 @@ connection = SQLTools()
 Now a connection has been established, you can use the packaged `SQLTools.query()` function to send general queries to the database in any form you like. Otherwise, additional helper functions allow easy schema creation based on the data given.
 ```
 data = pd.read_csv('data.csv')
-connecttion.parse_and_upload(data)
+connection.parse_and_upload(data)
 
 connection.query("""SELECT * FROM database""")
 ```
